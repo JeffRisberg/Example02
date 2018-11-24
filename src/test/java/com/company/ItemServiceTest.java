@@ -1,41 +1,29 @@
 package com.company;
 
-import com.company.models.Item;
 import com.company.services.ItemService;
 import com.company.stores.ItemStore;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class ItemServiceTest {
 
-  @Mock
-  private ItemStore itemStore;
-
-  @InjectMocks
   private ItemService itemService;
+  private ItemStore itemStore;
 
   @Before
   public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
+    Injector injector = Guice.createInjector(new MockAppModule());
+
+    itemService = injector.getInstance(ItemService.class);
+    itemStore = itemService.getItemStore();
   }
 
   @Test
   public void getItemNameUpperCase() {
-    //
-    // Given
-    //
-    Item mockedItem = new Item(1L, "Item 1", "This is item 1", 2000);
-    when(itemStore.findById(1L)).thenReturn(mockedItem);
-
     //
     // When
     //
@@ -44,29 +32,18 @@ public class ItemServiceTest {
     //
     // Then
     //
-    verify(itemStore, times(1)).findById(1L);
+    //verify(itemStore, times(1)).findById(1L);
     assertEquals("ITEM 1", result);
   }
 
   @Test
   public void getAveragePrice() {
     //
-    // Given
-    //
-    Item mockedItem1 = new Item(1L, "Item 1", "This is item 1", 2000);
-    Item mockedItem2 = new Item(2L, "Item 2", "This is item 2", 4000);
-    List<Item> mockedItems = new ArrayList<>();
-    mockedItems.add(mockedItem1);
-    mockedItems.add(mockedItem2);
-
-    when(itemStore.readAllItems()).thenReturn(mockedItems);
-
-    //
     // When
     //
     int result = itemService.getAveragePrice();
 
-    verify(itemStore, times(1)).readAllItems();
+    //Spy.(itemStore, times(1)).readAllItems();
     assertEquals(3000, result);
   }
 }
