@@ -6,8 +6,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class ItemServiceTest {
 
@@ -24,6 +27,7 @@ public class ItemServiceTest {
 
   @Test
   public void getItemNameUpperCase() {
+    ItemStore spyItemStore = Mockito.spy(itemStore);
     //
     // When
     //
@@ -32,18 +36,20 @@ public class ItemServiceTest {
     //
     // Then
     //
-    //verify(itemStore, times(1)).findById(1L);
+    verify(spyItemStore, times(1)).findById(1L);
     assertEquals("ITEM 1", result);
   }
 
   @Test
   public void getAveragePrice() {
+    ItemStore spyItemStore = Mockito.spy(itemStore);
+
     //
     // When
     //
     int result = itemService.getAveragePrice();
 
-    //Spy.(itemStore, times(1)).readAllItems();
+    verify(spyItemStore, times(1)).readAllItems();
     assertEquals(3000, result);
   }
 }
