@@ -12,9 +12,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class ItemServiceTest {
@@ -32,7 +30,6 @@ public class ItemServiceTest {
 
   @Test
   public void getItemNameUpperCase() {
-
     //
     // Given
     //
@@ -47,8 +44,8 @@ public class ItemServiceTest {
     //
     // Then
     //
-    verify(itemStore, times(1)).findById(22L);
-    assertThat(result, is("ITEM 1"));
+    verify(itemStore, times(1)).findById(1L);
+    assertEquals("ITEM 1", result);
   }
 
   @Test
@@ -56,8 +53,8 @@ public class ItemServiceTest {
     //
     // Given
     //
-    Item mockedItem1 = new Item(11L, "Item 1", "This is item 1", 2000);
-    Item mockedItem2 = new Item(22L, "Item 2", "This is item 2", 4000);
+    Item mockedItem1 = new Item(1L, "Item 1", "This is item 1", 2000);
+    Item mockedItem2 = new Item(2L, "Item 2", "This is item 2", 4000);
     List<Item> mockedItems = new ArrayList<>();
     mockedItems.add(mockedItem1);
     mockedItems.add(mockedItem2);
