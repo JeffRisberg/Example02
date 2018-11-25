@@ -11,6 +11,10 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <lombokVersion>1.16.18</lombokVersion>
+    <guiceVersion>4.1.0</guiceVersion>
+    <junitVersion>4.12</junitVersion>
+    <mockitoVersion>2.23.4</mockitoVersion>
   </properties>
 
   <dependencies>
@@ -22,24 +26,23 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.18</version>
-      <scope>provided></scope>
+      <version>${lombokVersion}</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.1.0</version>
+      <version>${guiceVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>2.23.4</version>
+      <version>${mockitoVersion}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>${junitVersion}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
