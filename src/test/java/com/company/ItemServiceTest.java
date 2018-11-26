@@ -6,9 +6,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
@@ -24,34 +21,34 @@ public class ItemServiceTest {
     Injector injector = Guice.createInjector(new MockAppModule());
 
     itemService = injector.getInstance(ItemService.class);
-    itemStore = itemService.getItemStore();
+    itemStore = itemService.getItemStore(); // will be a mock object
   }
 
   @Test
   public void getItemNameUpperCase() {
-    ItemStore spyItemStore = Mockito.spy(itemStore);
     //
-    // When
+    // Test
     //
     String result = itemService.getItemNameUpperCase(1L);
 
     //
-    // Then
+    // Verity
     //
-    verify(spyItemStore, times(1)).findById(1L);
+    verify(itemStore, times(1)).findById(1L);
     assertEquals("ITEM 1", result);
   }
 
   @Test
   public void getAveragePrice() {
-    ItemStore spyItemStore = Mockito.spy(itemStore);
-
     //
-    // When
+    // Test
     //
     int result = itemService.getAveragePrice();
 
-    verify(spyItemStore, times(1)).readAllItems();
+    //
+    // Verify
+    //
+    verify(itemStore, times(1)).readAllItems();
     assertEquals(3000, result);
   }
 }

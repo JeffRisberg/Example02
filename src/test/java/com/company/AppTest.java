@@ -1,11 +1,6 @@
 package com.company;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -14,13 +9,6 @@ import static org.junit.Assert.fail;
  * Unit test for simple App.
  */
 public class AppTest {
-
-  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
-  @Before
-  public void setUpStreams() {
-    System.setOut(new PrintStream(outContent));
-  }
 
   @Test
   public void testAppConstructor() {
@@ -33,17 +21,8 @@ public class AppTest {
 
   @Test
   public void testAppMain() {
-    App.main(null);
-    try {
-      assertEquals("Hello World!" + System.getProperty("line.separator"), outContent.toString());
-    } catch (AssertionError e) {
-      fail("\"message\" is not \"Hello World!\"");
-    }
-  }
+    int x = new App().getAveragePrice();
 
-  @After
-  public void cleanUpStreams() {
-    System.setOut(null);
+    assertEquals(41, x);
   }
-
 }

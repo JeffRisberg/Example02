@@ -3,8 +3,6 @@ package com.company;
 import com.company.models.Item;
 import com.company.services.ItemService;
 import com.company.stores.ItemStore;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,21 +38,12 @@ public class ItemServiceTestWithAnnotations {
     when(itemStore.readAllItems()).thenReturn(mockedItems);
 
     when(itemStore.findById(1L)).thenReturn(mockedItem1);
-    when(itemStore.findById(2L)).thenReturn(mockedItem2);
-  }
-
-  @Before
-  public void setUp() throws Exception {
-    Injector injector = Guice.createInjector(new MockAppModule());
-
-    itemService = injector.getInstance(ItemService.class);
-    itemStore = itemService.getItemStore();
   }
 
   @Test
   public void getItemNameUpperCase() {
     //
-    // When
+    // Test
     //
     String result = itemService.getItemNameUpperCase(1L);
 
@@ -68,7 +57,7 @@ public class ItemServiceTestWithAnnotations {
   @Test
   public void getAveragePrice() {
     //
-    // When
+    // Test
     //
     int result = itemService.getAveragePrice();
 

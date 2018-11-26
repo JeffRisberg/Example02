@@ -19,8 +19,12 @@ public class App {
     averagePrice = itemService.getAveragePrice();
   }
 
+  public int getAveragePrice() {
+    return averagePrice;
+  }
+
   public static void main(String[] args) {
 
-    System.out.println(new App().averagePrice);
+    System.out.println(new App().getAveragePrice());
   }
 }
