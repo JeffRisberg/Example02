@@ -32,7 +32,7 @@ public class ItemServiceTest {
     String result = itemService.getItemNameUpperCase(1L);
 
     //
-    // Verity
+    // Verify
     //
     verify(itemStore, times(1)).findById(1L);
     assertEquals("ITEM 1", result);
