@@ -13,7 +13,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <lombokVersion>1.16.18</lombokVersion>
     <guiceVersion>4.2.3</guiceVersion>
-    <junitVersion>4.13</junitVersion>
+    <junitVersion>4.13.1</junitVersion>
     <mockitoVersion>2.23.4</mockitoVersion>
   </properties>
 
