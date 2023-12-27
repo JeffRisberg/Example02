@@ -21,8 +21,8 @@ public class AppTest {
 
   @Test
   public void testAppMain() {
-    int x = new App().getAveragePrice();
+    int averagePrice = new App().getAveragePrice();
 
-    assertEquals(41, x);
+    assertEquals(41, averagePrice);
   }
 }

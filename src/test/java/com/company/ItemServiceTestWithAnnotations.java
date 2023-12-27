@@ -1,8 +1,13 @@
 package com.company;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
 import com.company.models.Item;
 import com.company.services.ItemService;
 import com.company.stores.ItemStore;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,22 +15,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ItemServiceTestWithAnnotations {
 
-  @Mock
-  private ItemStore itemStore;
+  @Mock private ItemStore itemStore;
 
-  @InjectMocks
-  private ItemService itemService;
+  @InjectMocks private ItemService itemService;
 
   @Before
   public void setUp() throws Exception {
@@ -51,7 +46,7 @@ public class ItemServiceTestWithAnnotations {
     // Verify
     //
     verify(itemStore, times(1)).findById(1L);
-    assertThat(result, is("ITEM 1"));
+    assertEquals(result, "ITEM 1");
   }
 
   @Test
