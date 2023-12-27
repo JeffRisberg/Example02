@@ -26,6 +26,8 @@ public class MockAppModule extends AbstractModule {
 
     when(mockItemStore.findById(1L)).thenReturn(mockedItem1);
 
+    when(mockItemStore.findById(2L)).thenReturn(mockedItem2);
+
     bind(ItemStore.class).toInstance(mockItemStore);
   }
 }

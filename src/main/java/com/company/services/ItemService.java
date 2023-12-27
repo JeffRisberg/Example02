@@ -20,6 +20,10 @@ public class ItemService {
     return itemStore;
   }
 
+  public Item getById(long id) {
+    return itemStore.findById(id);
+  }
+
   public int getAveragePrice() {
     List<Item> items = itemStore.readAllItems();
 

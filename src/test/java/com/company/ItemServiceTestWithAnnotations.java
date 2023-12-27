@@ -36,6 +36,20 @@ public class ItemServiceTestWithAnnotations {
   }
 
   @Test
+  public void getItemById() {
+    //
+    // When
+    //
+    Item result = itemService.getById(1L);
+
+    //
+    // Verify
+    //
+    verify(itemStore, times(1)).findById(1L);
+    assertEquals(result.getName(), "Item 1");
+  }
+
+  @Test
   public void getItemNameUpperCase() {
     //
     // Test
