@@ -23,7 +23,7 @@ public class ItemStore {
     items.add(item4);
   }
 
-  public List readAllItems() {
+  public List<Item> readAllItems() {
     return items;
   }
 

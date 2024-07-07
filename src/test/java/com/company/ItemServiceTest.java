@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.models.Item;
 import com.company.services.ItemService;
 import com.company.stores.ItemStore;
 import com.google.inject.Guice;
@@ -22,6 +23,20 @@ public class ItemServiceTest {
 
     itemService = injector.getInstance(ItemService.class);
     itemStore = itemService.getItemStore(); // will be a mock object
+  }
+
+  @Test
+  public void getItemById() {
+    //
+    // When
+    //
+    Item result = itemService.getById(1L);
+
+    //
+    // Verify
+    //
+    verify(itemStore, times(1)).findById(1L);
+    assertEquals(result.getName(), "Item 1");
   }
 
   @Test
