@@ -1,10 +1,14 @@
 package com.company.stores;
 
 import com.company.models.Item;
-
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.mockito.Mockito;
 
+
+@Slf4j
 public class ItemStore {
 
   Item item1 = new Item(2L, "Furby", "robot toy", 56);
@@ -22,8 +26,12 @@ public class ItemStore {
     items.add(item3);
     items.add(item4);
 
-    //log.info("created ItemStore");
-    String query = "select * from items where name='Furby'";
+    System.out.println("itemStore created");
+
+    HttpServletRequest request = Mockito.mock(HttpServletRequest.class); // Mockito
+
+    // sql injection
+    String query = "SELECT * FROM accounts WHERE custID='" + request.getParameter("id") + "'";
   }
 
   public List<Item> readAllItems() {
@@ -32,8 +40,9 @@ public class ItemStore {
 
   public Item findById(long id) {
     for (Item item : items) {
-      if (item.getId() == id)
+      if (item.getId() == id) {
         return item;
+      }
     }
     return null;
   }
