@@ -21,6 +21,9 @@ public class ItemStore {
     items.add(item2);
     items.add(item3);
     items.add(item4);
+
+    //log.info("created ItemStore");
+    String query = "select * from items where name='Furby'";
   }
 
   public List<Item> readAllItems() {
