@@ -1,28 +1,42 @@
 package com.company;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
 import com.company.models.Item;
 import com.company.services.ItemService;
 import com.company.stores.ItemStore;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
+@Slf4j
 public class ItemServiceTest {
 
-  private ItemService itemService;
   private ItemStore itemStore;
+  private ItemService itemService;
 
   @Before
   public void setUp() throws Exception {
-    Injector injector = Guice.createInjector(new MockAppModule());
+    itemStore = mock(ItemStore.class);
 
-    itemService = injector.getInstance(ItemService.class);
-    itemStore = itemService.getItemStore(); // will be a mock object
+    Item mockedItemA = new Item(1L, "Item 1", "Item 1 Desc", 2000);
+    when(itemStore.findById(1L)).thenReturn(mockedItemA);
+
+    Item mockedItemB = new Item(1L, "Item 2", "Item 2 Desc", 4000);
+    when(itemStore.findById(2L)).thenReturn(mockedItemB);
+
+    Item mockedItem1 = new Item(1L, "Item 1", "Item 1 Desc", 2000);
+    Item mockedItem2 = new Item(2L, "Item 2", "Item 2 Desc", 4000);
+    List<Item> mockedItems = new ArrayList<>();
+    mockedItems.add(mockedItem1);
+    mockedItems.add(mockedItem2);
+
+    when(itemStore.readAllItems()).thenReturn(mockedItems);
+
+    itemService = new ItemService(itemStore);
+    log.info("Set up Store and Service");
   }
 
   @Test
@@ -47,10 +61,10 @@ public class ItemServiceTest {
     String result = itemService.getItemNameUpperCase(1L);
 
     //
-    // Verify
+    // Assert
     //
     verify(itemStore, times(1)).findById(1L);
-    assertEquals("ITEM 1", result);
+    assertEquals(result, "ITEM 1");
   }
 
   @Test
@@ -61,7 +75,7 @@ public class ItemServiceTest {
     int result = itemService.getAveragePrice();
 
     //
-    // Verify
+    // Assert
     //
     verify(itemStore, times(1)).readAllItems();
     assertEquals(3000, result);
