@@ -1,4 +1,4 @@
-# Example02
+# JavaExample02
 
 The repository contains a simple Java application which outputs the string
 "Hello world!" and is accompanied by a couple of unit tests to check that the
