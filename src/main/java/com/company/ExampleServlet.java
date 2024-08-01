@@ -12,41 +12,43 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 public class ExampleServlet extends HttpServlet implements Filter {
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    throws ServletException, IOException {
 
     String requestURL = request.getRequestURL().toString();
 
     response
-        .setHeader("Location", request.getParameter("target"));
+      .setHeader("Location", request.getParameter("target"));
     response
-        .getOutputStream()
-        .write(requestURL.getBytes());
+      .getOutputStream()
+      .write(requestURL.getBytes());
   }
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
   }
 
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    throws IOException, ServletException {
     HttpServletRequest req = (HttpServletRequest) request;
     HttpServletResponse res = (HttpServletResponse) response;
 
     Enumeration<String> params = req.getParameterNames();
-    while(params.hasMoreElements()){
+    while (params.hasMoreElements()) {
       String name = params.nextElement();
       String value = request.getParameter(name);
-      log(req.getRemoteAddr() + "::Request Params::{"+name+"="+value+"}");
+      log(req.getRemoteAddr() + "::Request Params::{" + name + "=" + value + "}");
     }
 
     Cookie[] cookies = req.getCookies();
-    if(cookies != null){
-      for(Cookie cookie : cookies){
-        log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        log(req.getRemoteAddr() + "::Cookie::{" + cookie.getName() + "," + cookie.getValue() + "}");
       }
     }
 
